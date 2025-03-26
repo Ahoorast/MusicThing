@@ -16,7 +16,7 @@ async def root():
 class GenreRequest(BaseModel):
     genres: List[str]
 
-@app.get("/data/embeddings")
+@app.post("/data/embeddings")
 async def get_embeddings(genreRequest: GenreRequest):
     genreEmbeddings = embeddings.get_embeddings(genreRequest.genres)
     response = {}
