@@ -23,7 +23,7 @@
 >
 <p>{greeting}</p>
 
-<Svelvet id="my-canvas" width="{window.innerWidth}" height="{window.innerHeight}">
+<Svelvet id="my-canvas" width="{600}" height="{600}">
 	<Node>
 	</Node>
 </Svelvet>

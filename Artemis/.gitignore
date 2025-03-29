@@ -1,6 +1,6 @@
 node_modules
 
-*.lockb
+bun.lockb
 # Output
 .output
 .vercel
