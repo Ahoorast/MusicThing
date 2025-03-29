@@ -1,30 +1,34 @@
 <script>
 	import { Node, Svelvet } from 'svelvet';
 	import { trpc } from '$lib/trpc/client';
+	import { onMount } from 'svelte';
 	
-	let greeting = 'press the button to load data';
-	let loading = false;
+	let genres = [];
+	let screenWidth = 700;
+	let screenHeight = 700;
+	let positionArray = [];
+	onMount(async () => {
+		genres = await trpc().genres.all.query();
+		screenWidth = window?.innerWidth;
+		screenHeight = window?.innerHeight;
+	});
 	
-	const loadData = async () => {
-		loading = true;
-		greeting = await trpc().greeting.query();
-		loading = false;
-	};
+	$: positionArray = genres.map(genre => ({x: genre.x_cor * 10, y: genre.y_cor * 10}));
+	$: console.log(positionArray.slice(0, 100));
 </script>
 
-<h6>Loading data in<br /><code>+page.svelte</code></h6>
-
-<a
-	href="#load"
-	role="button"
-	class="secondary"
-	aria-busy={loading}
-	on:click|preventDefault={loadData}>Load</a
->
-<p>{greeting}</p>
-
-<Svelvet id="my-canvas" width="{600}" height="{600}">
-	<Node>
-	</Node>
+<Svelvet id="my-canvas" width="{screenWidth}" height="{screenHeight}">
+	{#if genres.length > 0}
+		{#each genres.slice(0, 600) as genre, indx}
+			<Node 
+				key={genre.id}
+				bind:position={positionArray[indx]}
+			>
+				<div>
+					{genre.name}
+				</div>
+			</Node>
+		{/each} 
+	{/if}
 </Svelvet>
 
