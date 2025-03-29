@@ -1,6 +1,5 @@
-// hooks.server.ts
-import { createContext } from '$lib/tprc/context';
-import { router } from '$lib/tprc/router';
+import { createContext } from '$lib/trpc/context';
+import { router } from '$lib/trpc/router';
 import type { Handle } from '@sveltejs/kit';
 import { createTRPCHandle } from 'trpc-sveltekit';
 

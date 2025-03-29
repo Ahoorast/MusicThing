@@ -1,4 +1,3 @@
-// lib/trpc/client.ts
 import type { Router } from '$lib/trpc/router';
 import { createTRPCClient, type TRPCClientInit } from 'trpc-sveltekit';
 

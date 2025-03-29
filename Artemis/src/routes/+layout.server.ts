@@ -7,16 +7,21 @@ import { toSnakeCase } from "drizzle-orm/casing";
 
 const getEmbeddingsForGenres = async (genres: string[]) => {
 	const url = APOLLO_URL;
-	const genreEmbeddings = await fetch(`${url}/data/embeddings`, {
-		method: "POST",
-		body: JSON.stringify({ 
-			"genres": genres
-		}),
-		headers: {
-			"Content-Type": "application/json"
-		}
-	});
-	return genreEmbeddings.json();
+	try {
+		const genreEmbeddings = await fetch(`${url}/data/embeddings`, {
+			method: "POST",
+			body: JSON.stringify({ 
+				"genres": genres
+			}),
+			headers: {
+				"Content-Type": "application/json"
+			}
+		});
+		return genreEmbeddings.json();
+	} catch (e) {
+		console.log("Apollo unavailable");
+		return null;
+	}
 };
 // every 5 seconds
 const fetchGenreEmbeddings =  new Cron("*/5 * * * * *", async () => {
@@ -32,12 +37,12 @@ const fetchGenreEmbeddings =  new Cron("*/5 * * * * *", async () => {
 });
 
 type Coordinates = {
-  x: number;
-  y: number;
+	x: number;
+	y: number;
 };
 
 type CoordinateMap = {
-  [key: string]: Coordinates;
+	[key: string]: Coordinates;
 };
 
 const tSNErequest = async () => {
