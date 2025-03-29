@@ -1,2 +1,9 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script>
+	import { Node, Svelvet } from 'svelvet';
+</script>
+
+<Svelvet id="my-canvas" width="{window.innerWidth}" height="{window.innerHeight}">
+	<Node>
+	</Node>
+</Svelvet>
+
