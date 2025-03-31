@@ -42,24 +42,24 @@
 
 	$: positionArray = genres.map((genre) => ({ x: genre?.x_cor, y: genre?.y_cor }));
 
-    function transformPosition(position: { x: string | null; y: string | null }) {
-        const transformNumber = (num: string | null) => {
-            if (num == null) {
-                return 0;
-            }
-            let number = Number(num);
-            number += 100;
-            number *= 30;
-            return number;
-        };
-        return { x: transformNumber(position.x), y: transformNumber(position.y) };
-    }
+	function transformPosition(position: { x: string | null; y: string | null }) {
+		const transformNumber = (num: string | null) => {
+			if (num == null) {
+				return 0;
+			}
+			let number = Number(num);
+			number += 100;
+			number *= 30;
+			return number;
+		};
+		return { x: transformNumber(position.x), y: transformNumber(position.y) };
+	}
 
 	$: {
 		if (context) {
 			context.clearRect(0, 0, screenWidth, screenHeight);
 			positionArray.forEach((position, indx) => {
-                let coordinates = transformPosition(position);
+				let coordinates = transformPosition(position);
 				context.fillText(genres[indx].name, coordinates.x, coordinates.y);
 			});
 		}
